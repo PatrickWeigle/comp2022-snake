@@ -15,6 +15,7 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Score score;
+    private Snake snake;
     
     private boolean isPlaying = false;
 
@@ -31,6 +32,9 @@ public class Board extends JPanel implements ActionListener {
         score = new Score();
         add(score);       
         
+        snake = new Snake();
+        add(snake);
+       
         timer = new Timer(5, this);
         timer.start();
     }
@@ -42,7 +46,7 @@ public class Board extends JPanel implements ActionListener {
         score.paintComponent(g);
         
         Graphics2D g2d = (Graphics2D)g;        
-
+        g2d.drawImage(snake.getImage(),snake.getX(),snake.getY(),this);
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         
@@ -91,11 +95,9 @@ public class Board extends JPanel implements ActionListener {
                     break;
                     
                 case KeyEvent.VK_UP:
-                    score.addScore(10);
                     break;
                     
                 case KeyEvent.VK_DOWN:
-                    score.subScore(-10);
                     break;
             }
             
