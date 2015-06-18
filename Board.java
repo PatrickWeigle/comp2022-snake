@@ -16,8 +16,23 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Score score;
     private Snake snake;
+    private Snake comida;
+    private Snake corpo;
+    private static int comidax;
+    private static int comiday;
+    private static String mover = " ";
     
-    private boolean isPlaying = false;
+    
+    
+    //vai receber as posiçoes
+    private static int pcomidax;
+    private static int qcomiday;
+    private static int xsnake;
+    private static int ysnake;
+    
+    
+    
+    private static boolean isPlaying = true;
 
     private Font font;
        
@@ -34,9 +49,21 @@ public class Board extends JPanel implements ActionListener {
         
         snake = new Snake();
         add(snake);
+        
+        comida = new Snake();
+        comida.comida();
+        add(comida);
+        
+        corpo = new Snake();
+        corpo.corpo();
+        add(corpo);
        
         timer = new Timer(5, this);
         timer.start();
+    }
+    
+    public void setIsPlaying(boolean x){
+        this.isPlaying = x;
     }
 
 
@@ -46,7 +73,13 @@ public class Board extends JPanel implements ActionListener {
         score.paintComponent(g);
         
         Graphics2D g2d = (Graphics2D)g;        
+        if(isPlaying== true){
         g2d.drawImage(snake.getImage(),snake.getX(),snake.getY(),this);
+        g2d.drawImage(comida.getImageComida(),comida.getP(),comida.getQ(),this);
+        
+    }else{
+        fimJogo(g);
+    }
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         
@@ -71,8 +104,48 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     
-    public void actionPerformed(ActionEvent e) {        
+    
+    public void localComida ()
+    {
+        comidax = 1 + (int)(Math.random() * 750);
+        comiday = 1 + (int)(Math.random() * 550);
+        
+        comida.geraComida(comidax,comiday);
+
+       
+    }
+    
+    public void posiçoes(){
+        pcomidax = comida.getP();
+        qcomiday = comida.getQ();
+        xsnake = snake.getX();
+        ysnake = snake.getY();
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if(mover == "left"){
+            snake.move(-1,0);
+        }else if(mover == "right"){
+            snake.move(1,0);
+        }else if(mover == "up"){
+            snake.move(0,-1);
+        }else if(mover == "down"){
+            snake.move(0,1);
+        }
+        
+        posiçoes();
+        if((xsnake ==(pcomidax)) && (qcomiday == ysnake)){
+            localComida();
+            score.addScore(+1);
+            posiçoes();
+        }
+        
         repaint();  
+    }
+    
+    public void fimJogo(Graphics g){
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawString("GAME OVER", 300, 250);
     }
     
     
@@ -85,23 +158,30 @@ public class Board extends JPanel implements ActionListener {
 
             switch (key){
                 case KeyEvent.VK_ENTER:
-                    score.addScore(100);
+                    score.addScore(1);
                     break;
                     
                 case KeyEvent.VK_LEFT:
+                    mover = "left";
                     break;
                     
                 case KeyEvent.VK_RIGHT:
+                    mover = "right";
                     break;
                     
                 case KeyEvent.VK_UP:
+                    mover = "up";
                     break;
                     
                 case KeyEvent.VK_DOWN:
+                    mover = "down";
                     break;
             }
             
         }
+        
+    
+    
     }
     
 }

@@ -1,10 +1,18 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Board()
-comment1.params=g
-comment1.target=void\ paint(java.awt.Graphics)
+comment1.params=x
+comment1.target=void\ setIsPlaying(boolean)
 comment2.params=g
-comment2.target=void\ paintIntro(java.awt.Graphics)
-comment3.params=e
-comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=4
+comment2.target=void\ paint(java.awt.Graphics)
+comment3.params=g
+comment3.target=void\ paintIntro(java.awt.Graphics)
+comment4.params=
+comment4.target=void\ localComida()
+comment5.params=
+comment5.target=void\ posi\u00E7oes()
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=g
+comment7.target=void\ fimJogo(java.awt.Graphics)
+numComments=8

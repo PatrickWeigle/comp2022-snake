@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=_node
+comment0.target=void\ inserirInicio(Snake)
+comment1.params=
+comment1.target=boolean\ isEmpty()
+comment2.params=_node
+comment2.target=void\ inserirFinal(Snake)
+numComments=3
