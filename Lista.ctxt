@@ -1,8 +1,16 @@
 #BlueJ class context
-comment0.params=_node
-comment0.target=void\ inserirInicio(Snake)
+comment0.params=
+comment0.target=Lista()
 comment1.params=
 comment1.target=boolean\ isEmpty()
-comment2.params=_node
-comment2.target=void\ inserirFinal(Snake)
-numComments=3
+comment2.params=
+comment2.target=void\ inserirFinal()
+comment3.params=
+comment3.target=Snake\ ultimaSnake()
+comment4.params=aux
+comment4.target=Snake\ validaCorpo(Snake)
+comment5.params=
+comment5.target=Snake\ getCabeca()
+comment6.params=_x\ _y
+comment6.target=void\ moveCabeca(int,\ int)
+numComments=7

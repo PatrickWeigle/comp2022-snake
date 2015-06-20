@@ -21,26 +21,28 @@ public class Snake extends JPanel
 
     private int p = 60;
     private int q = 80;
-    private int x;
-    private int y;
-    private int j;
-    private int k;
+    private int x = 60 ;
+    private int y = 40;
     private Image image;
     private Image imageComida;
     private Image imageCorpo;
     private Object w;
     private Snake proximo;
+    private Snake anterior;
+
     
     public Snake() {
         ImageIcon ii = new ImageIcon(this.getClass().getResource(snake));
         image = ii.getImage();
         x = 40;
-        y = 60;
+        x = 60;
         
+        this.proximo = null;
     }
     
    
     public void move(int _x, int _y) {
+        System.out.println("X:"+x+" Y:"+y);
         if(x>=750 || y> 550 || x==0 || y==0){
             Board fim = new Board();
             fim.setIsPlaying(false);
@@ -48,10 +50,16 @@ public class Snake extends JPanel
         }else{
             x += _x;
             y += _y;
+            
         }
         
         
     }
+    
+//     public void moveCorpo(int _j, int _k){
+//          += (_j+10);
+//         k += (_k);
+//     }
     
     public void geraComida(int _p, int _q){
         p = _p;
@@ -78,9 +86,21 @@ public class Snake extends JPanel
         return imageComida;
     }
     
-    public void corpo() {
-        ImageIcon iii = new ImageIcon(this.getClass().getResource(corpo));
-        imageComida = iii.getImage();
+    public Snake(int i) {
+//         ImageIcon iii = new ImageIcon(this.getClass().getResource(corpo));
+//         imageCorpo = iii.getImage();
+//         x;
+//         y;
+//         this.proximo = null;
+
+        ImageIcon ii = new ImageIcon(this.getClass().getResource(corpo));
+        image = ii.getImage();
+        this.proximo = null;
+           
+    }
+    
+    public Snake novaSnake(){
+        return new Snake(1);
     }
     
     
@@ -92,21 +112,29 @@ public class Snake extends JPanel
     public int getY() {
         return y;
     }
+    
+    public void setX(int _x){
+        this.x += _x;
+    }
+    
+    public void setY(int _y){
+        this.y += _y;
+    }
 
     public Image getImage() {
         return image;
     }
     
-    public int getJ() {
-        return j;
-    }
-
-    public int getK() {
-        return k;
-    }
+//     public int getJ() {
+//         return j;
+//     }
+// 
+//     public int getK() {
+//         return k;
+//     }
 
     public Image getImageCorpo() {
-        return image;
+        return imageCorpo;
     }
     
     
@@ -130,6 +158,14 @@ public class Snake extends JPanel
     
     public Snake getProximo(){
         return this.proximo;
+    }
+    
+    public Snake getAnterior(){
+        return this.anterior;
+    }
+    
+    public void setAnterior(Snake _anterior){
+        this.anterior = _anterior;
     }
 
 }
