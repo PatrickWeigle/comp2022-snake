@@ -15,12 +15,13 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Score score;
-    private Snake snake;
+    private Snake snake = new Snake();
     private Snake comida;
     private Snake corpo;
     private static int comidax;
     private static int comiday;
-    private static String mover = " ";
+    private static String mover = "rigth";
+    private static boolean valida = false;
     
     
     
@@ -29,6 +30,7 @@ public class Board extends JPanel implements ActionListener {
     private static int qcomiday;
     private static int xsnake;
     private static int ysnake;
+    Lista lista = new Lista();
     
     
     
@@ -47,16 +49,24 @@ public class Board extends JPanel implements ActionListener {
         score = new Score();
         add(score);       
         
-        snake = new Snake();
-        add(snake);
+        Snake aux = lista.getCabeca();
+        while(aux.getProximo() != null){
+            add(aux);
+            aux = aux.getProximo();
+        }
+//         //if(lista.isEmpty() == true){
+//             snake = new Snake();
+//             lista.inserirFinal(snake);
+//             add(snake);
+//         //}
         
         comida = new Snake();
         comida.comida();
         add(comida);
         
-        corpo = new Snake();
-        corpo.corpo();
-        add(corpo);
+//         corpo = new Snake(1);
+//         //corpo.corpo();
+//         add(corpo);
        
         timer = new Timer(5, this);
         timer.start();
@@ -72,11 +82,28 @@ public class Board extends JPanel implements ActionListener {
         
         score.paintComponent(g);
         
-        Graphics2D g2d = (Graphics2D)g;        
-        if(isPlaying== true){
-        g2d.drawImage(snake.getImage(),snake.getX(),snake.getY(),this);
-        g2d.drawImage(comida.getImageComida(),comida.getP(),comida.getQ(),this);
+        Graphics2D g2d = (Graphics2D)g;   
         
+        if(isPlaying== true){
+            
+        //g2d.drawImage(snake.getImage(),snake.getX(),snake.getY(),this);
+        
+        g2d.drawImage(comida.getImageComida(),comida.getP(),comida.getQ(),this);
+        Snake aux = lista.getCabeca();
+        if(aux.getProximo() == null){
+           g2d.drawImage(aux.getImage(),aux.getX(), aux.getY(),this);
+        }else{
+            while(aux.getProximo()!= null){
+                g2d.drawImage(aux.getImage(),aux.getX(), aux.getY(),this);
+                aux = aux.getProximo();
+            }
+        }
+//         Snake aux = lista.getCabeca();
+//         aux = lista.ultimaSnake();
+//         aux = lista.validaCorpo(aux);
+//         if(aux != null){
+//             g2d.drawImage(aux.getImage(),aux.getX()+50,aux.getY()+50,this);
+//         }
     }else{
         fimJogo(g);
     }
@@ -86,23 +113,23 @@ public class Board extends JPanel implements ActionListener {
     }
 
 
-    public void paintIntro(Graphics g) {
-        if(isPlaying){
-            isPlaying = false;
-            Graphics2D g2d = (Graphics2D) g;
-            try{
-                File file = new File("fonts/VT323-Regular.ttf");
-                font = Font.createFont(Font.TRUETYPE_FONT, file);
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(font);
-                font = font.deriveFont(Font.PLAIN,40);
-                g2d.setFont(font);
-            }catch (Exception e){
-                System.out.println(e.toString());
-            }   
-            g2d.drawString("S N A K E: " + this.score, 300, 300);
-        }
-    }
+//     public void paintIntro(Graphics g) {
+//         if(isPlaying){
+//             isPlaying = false;
+//             Graphics2D g2d = (Graphics2D) g;
+//             try{
+//                 File file = new File("fonts/VT323-Regular.ttf");
+//                 font = Font.createFont(Font.TRUETYPE_FONT, file);
+//                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//                 ge.registerFont(font);
+//                 font = font.deriveFont(Font.PLAIN,40);
+//                 g2d.setFont(font);
+//             }catch (Exception e){
+//                 System.out.println(e.toString());
+//             }   
+//             g2d.drawString("S N A K E: " + this.score, 300, 300);
+//         }
+//     }
     
     
     public void localComida ()
@@ -116,31 +143,50 @@ public class Board extends JPanel implements ActionListener {
     }
     
     public void posiçoes(){
+        Snake aux = lista.getCabeca();
         pcomidax = comida.getP();
         qcomiday = comida.getQ();
-        xsnake = snake.getX();
-        ysnake = snake.getY();
+        xsnake = aux.getX();
+        ysnake = aux.getY();
     }
     
     public void actionPerformed(ActionEvent e) {
         if(mover == "left"){
-            snake.move(-1,0);
+            lista.moveCabeca(-1,0);
         }else if(mover == "right"){
-            snake.move(1,0);
+            lista.moveCabeca(1,0);
         }else if(mover == "up"){
-            snake.move(0,-1);
+            lista.moveCabeca(0,-1);
         }else if(mover == "down"){
-            snake.move(0,1);
+            lista.moveCabeca(0,1);
         }
         
+        
+        
         posiçoes();
-        if((xsnake ==(pcomidax)) && (qcomiday == ysnake)){
+        if((xsnake >=(pcomidax)&&(xsnake <=(pcomidax + 25)) && (qcomiday >= ysnake)&&(qcomiday <= ysnake+25))) {
             localComida();
             score.addScore(+1);
+            lista.inserirFinal();
+            
+//             snake = new Snake();
+//             lista.inserirFinal(snake);
+//             snake.corpo();
+//             add(corpo);
             posiçoes();
+            
+            
         }
         
         repaint();  
+    }
+    
+    public void newCorpo(){
+        corpo.novaSnake();
+        lista.inserirFinal();
+        //corpo.corpo();
+        add(corpo);
+        valida = true;
     }
     
     public void fimJogo(Graphics g){
