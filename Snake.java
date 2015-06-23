@@ -42,7 +42,7 @@ public class Snake extends JPanel
     
    
     public void move(int _x, int _y) {
-        System.out.println("X:"+x+" Y:"+y);
+        
         if(x>=750 || y> 550 || x==0 || y==0){
             Board fim = new Board();
             fim.setIsPlaying(false);
@@ -70,8 +70,9 @@ public class Snake extends JPanel
     public void comida() {
         ImageIcon i = new ImageIcon(this.getClass().getResource(comida));
         imageComida = i.getImage();
-        p = 60;
-        q = 200;
+        p = 1 + (int)(Math.random() * 750);
+        q = 1 + (int)(Math.random() * 550);
+        
     }
     
     public int getP() {
