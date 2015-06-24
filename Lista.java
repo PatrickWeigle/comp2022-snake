@@ -96,7 +96,7 @@ public class Lista
     public void moveCabeca(int _x, int _y,String direcao){
         moveX = inicio.getX();
         moveY = inicio.getY();
-        if(inicio.getX()>=760 || inicio.getY()> 580 || inicio.getX()<=0 || inicio.getY()<=0){
+        if(inicio.getX()>=780 || inicio.getY()> 580 || inicio.getX()<=0 || inicio.getY()<=0){
             Board fim = new Board();
             fim.setIsPlaying(false);
 
@@ -108,7 +108,7 @@ public class Lista
                 //moveCorpo(direcao);
             }
         }
-        System.out.println("X:"+inicio.getX()+" Y:"+inicio.getY());
+        
     }
 
     public void moveCorp(){

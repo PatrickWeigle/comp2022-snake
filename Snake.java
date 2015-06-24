@@ -86,8 +86,8 @@ public class Snake extends JPanel
     public void comida() {
         ImageIcon i = new ImageIcon(this.getClass().getResource(comida));
         imageComida = i.getImage();
-        p = 1 + (int)(Math.random() * 750);
-        q = 1 + (int)(Math.random() * 550);
+        p = 1 + (int)(Math.random() * 730);
+        q = 1 + (int)(Math.random() * 530);
 
     }
     

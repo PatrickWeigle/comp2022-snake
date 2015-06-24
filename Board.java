@@ -44,7 +44,6 @@ public class Board extends JPanel implements ActionListener {
         setDoubleBuffered(true);
         setBackground(Color.WHITE);
 
-               
 
         Snake aux = lista.getCabeca();
         while(aux.getProximo() != null){
@@ -60,11 +59,11 @@ public class Board extends JPanel implements ActionListener {
         comida = new Snake();
         comida.comida();
         add(comida);
-        
+
         campo = new Snake();
         campo.campo();
         add(campo);
-        
+
         score = new Score();
         add(score);
 
@@ -93,7 +92,7 @@ public class Board extends JPanel implements ActionListener {
             g2d.drawImage(campo.getImageCampo(),0,0,this);
             g2d.drawImage(comida.getImageComida(),comida.getP(),comida.getQ(),this);
             g2d.setColor(Color.YELLOW);
-             g2d.drawString("Score: " + score.getScore(), 600, 50);
+            g2d.drawString("Score: " + score.getScore(), 600, 50);
             Snake aux = lista.getCabeca();
             if(aux.getProximo() == null){
                 g2d.drawImage(aux.getImage(),aux.getX(), aux.getY(),this);
@@ -172,7 +171,7 @@ public class Board extends JPanel implements ActionListener {
                 lista.giraHead(mover);
             }
         }else if(isPlaying == false){
-            
+
         }
 
         posiçoes();
@@ -233,10 +232,13 @@ public class Board extends JPanel implements ActionListener {
                     lista = new Lista();
                     score = new Score();
                     comida = new Snake();
+                    comida.comida();
+                    add(comida);
                     mover = "right";
                     isPlaying = true;
 
                 }
+                break;
                 //                 int i = 0;
                 //                 while(i<30){
                 //                     inserirFinal();
