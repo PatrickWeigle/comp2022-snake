@@ -64,7 +64,7 @@ public class Board extends JPanel implements ActionListener {
         //         //corpo.corpo();
         //         add(corpo);
 
-        timer = new Timer(5, this);
+        timer = new Timer(120, this);
         timer.start();
     }
 
@@ -148,24 +148,28 @@ public class Board extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(mover == "left"){
-            lista.moveCabeca(-1,0,mover);
+            lista.moveCabeca(-20,0,mover);
+            lista.giraHead(mover);
         }else if(mover == "right"){
-            lista.moveCabeca(1,0,mover);
+            lista.moveCabeca(20,0,mover);
+            lista.giraHead(mover);
         }else if(mover == "up"){
-            lista.moveCabeca(0,-1,mover);
+            lista.moveCabeca(0,-20,mover);
+            lista.giraHead(mover);
         }else if(mover == "down"){
-            lista.moveCabeca(0,1,mover);
+            lista.moveCabeca(0,20,mover);
+            lista.giraHead(mover);
         }
 
         posiçoes();
-        if((xsnake >=(pcomidax)&&(xsnake <=(pcomidax + 30)) && (qcomiday >= ysnake)&&(qcomiday <= ysnake+30))) {
+        if((xsnake >=(pcomidax-25))&&(xsnake <=(pcomidax + 25)) && (ysnake >=(qcomiday-25))&&(ysnake <=(qcomiday + 25))) {
             localComida();
             score.addScore(+1);
             int i = 0;
-            while(i<30){
-                inserirFinal();
-                i++;
-            }
+            //while(i<30){
+            inserirFinal();
+            //    i++;
+            //}
 
             //             snake = new Snake();
             //             lista.inserirFinal(snake);
@@ -179,13 +183,13 @@ public class Board extends JPanel implements ActionListener {
 
     public void inserirFinal(){
         if (mover == "left"){
-            lista.inserirFinal(50,0);
+            lista.inserirFinal(30,0);
         }else if (mover == "right"){
-            lista.inserirFinal(-50,0);
+            lista.inserirFinal(-30,0);
         }else if (mover == "up"){
-            lista.inserirFinal(0,50);
+            lista.inserirFinal(0,30);
         }else if (mover == "down"){
-            lista.inserirFinal(0,-50);
+            lista.inserirFinal(0,-30);
         }
 
     }
@@ -210,12 +214,22 @@ public class Board extends JPanel implements ActionListener {
 
             switch (key){
                 case KeyEvent.VK_ENTER:
-                int i = 0;
-                while(i<30){
-                inserirFinal();
-                i++;
-            }
-                break;
+                if(isPlaying == false){
+                    lista = new Lista();
+                    score = new Score();
+                    comida = new Snake();
+                    comida.comida();
+                    add(comida);
+                    mover = "right";
+                    isPlaying = true;
+
+                }
+                //                 int i = 0;
+                //                 while(i<30){
+                //                     inserirFinal();
+                //                     i++;
+                //                 }
+                //                 break;
 
                 case KeyEvent.VK_LEFT:
                 if (mover == "right")
@@ -226,6 +240,7 @@ public class Board extends JPanel implements ActionListener {
                     Snake aux = lista.getCabeca();
                     pegaX = aux.getX();
                     pegaY = aux.getY();
+                    lista.giraHead(mover);
                     lista.setPegaXY(pegaX,pegaY,orien);
                 }
                 break;
@@ -239,6 +254,7 @@ public class Board extends JPanel implements ActionListener {
                     Snake aux = lista.getCabeca();
                     pegaX = aux.getX();
                     pegaY = aux.getY();
+                    lista.giraHead(mover);
                     lista.setPegaXY(pegaX,pegaY,orien);
                 }
                 break;
@@ -252,6 +268,7 @@ public class Board extends JPanel implements ActionListener {
                     Snake aux = lista.getCabeca();
                     pegaX = aux.getX();
                     pegaY = aux.getY();
+                    lista.giraHead(mover);
                     lista.setPegaXY(pegaX,pegaY,orien);
                 }
                 break;
@@ -265,6 +282,7 @@ public class Board extends JPanel implements ActionListener {
                     Snake aux = lista.getCabeca();
                     pegaX = aux.getX();
                     pegaY = aux.getY();
+                    lista.giraHead(mover);
                     lista.setPegaXY(pegaX,pegaY,orien);
                 }
                 break;

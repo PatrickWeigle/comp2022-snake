@@ -21,6 +21,17 @@ public class Lista
     public Lista(){
         this.inicio = new Snake();
     }
+    
+    public void giraHead(String mover){
+        inicio.setSnake(mover);
+    }
+    
+    public void subsHead(Snake aux){
+        aux.setProximo(inicio.getProximo());
+        aux.setY(inicio.getY());
+        aux.setX(inicio.getX());
+        inicio = aux;
+    }
 
     public boolean isEmpty(){
         if(inicio == null){
@@ -85,7 +96,7 @@ public class Lista
     public void moveCabeca(int _x, int _y,String direcao){
         moveX = inicio.getX();
         moveY = inicio.getY();
-        if(inicio.getX()>=750 || inicio.getY()> 550 || inicio.getX()==0 || inicio.getY()==0){
+        if(inicio.getX()>=760 || inicio.getY()> 580 || inicio.getX()==-20 || inicio.getY()==-20){
             Board fim = new Board();
             fim.setIsPlaying(false);
 
@@ -97,7 +108,7 @@ public class Lista
                 //moveCorpo(direcao);
             }
         }
-        System.out.println("X:"+inicio.getX()+" Y:"+inicio.getY());
+        //System.out.println("X:"+inicio.getX()+" Y:"+inicio.getY());
     }
 
     public void moveCorp(){
@@ -134,7 +145,7 @@ public class Lista
                 guardaY = aux.getY();
 
                 aux.setX(-aux.getX());
-                aux.setX(moveX+30);
+                aux.setX(moveX+15);
                 aux.setY(-aux.getY());
                 aux.setY(moveY);
                 moveX = guardaX;
@@ -145,7 +156,7 @@ public class Lista
                 guardaX = aux.getX();
                 guardaY = aux.getY();
                 aux.setX(-aux.getX());
-                aux.setX(moveX-30);
+                aux.setX(moveX-15);
                 aux.setY(-aux.getY());
                 aux.setY(moveY);
                 moveX = guardaX;
@@ -158,7 +169,7 @@ public class Lista
                 aux.setX(-aux.getX());
                 aux.setX(moveX);
                 aux.setY(-aux.getY());
-                aux.setY(moveY+30);
+                aux.setY(moveY+15);
                 moveX = guardaX;
                 moveY = guardaY;
 
@@ -169,7 +180,7 @@ public class Lista
                 aux.setX(-aux.getX());
                 aux.setX(moveX);
                 aux.setY(-aux.getY());
-                aux.setY(moveY-30);
+                aux.setY(moveY-15);
                 moveX = guardaX;
                 moveY = guardaY;
 
