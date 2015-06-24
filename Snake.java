@@ -16,14 +16,17 @@ public class Snake extends JPanel
     private static String snake = "images/head.png";
     private String comida = "images/fries.png";
     private String corpo = "images/body.png";
+    private String campo = "images/campo.png";
 
     private int p = 60;
     private int q = 80;
     private int x = 60 ;
     private int y = 40;
+    private int j = 2;
+    private int k = 2;
     private Image image;
     private Image imageComida;
-    private Image imageCorpo;
+    private Image imageCampo;
     private Object w;
     private Snake proximo;
     private Snake anterior;
@@ -87,6 +90,18 @@ public class Snake extends JPanel
         q = 1 + (int)(Math.random() * 550);
 
     }
+    
+    public void campo() {
+        ImageIcon iii = new ImageIcon(this.getClass().getResource(campo));
+        imageCampo = iii.getImage();
+        j = 2;
+        j = 2;
+
+    }
+    
+    public Image getImageCampo() {
+        return imageCampo;
+    }
 
     public int getP() {
         return p;
@@ -145,9 +160,7 @@ public class Snake extends JPanel
     //         return k;
     //     }
 
-    public Image getImageCorpo() {
-        return imageCorpo;
-    }
+    
 
     public Snake(String args)
     {
