@@ -72,10 +72,6 @@ public class Snake extends JPanel
         }
 
     }
-    //     public void moveCorpo(int _j, int _k){
-    //          += (_j+10);
-    //         k += (_k);
-    //     }
 
     public void geraComida(int _p, int _q){
         p = _p;
@@ -116,11 +112,6 @@ public class Snake extends JPanel
     }
 
     public Snake(int i) {
-        //         ImageIcon iii = new ImageIcon(this.getClass().getResource(corpo));
-        //         imageCorpo = iii.getImage();
-        //         x;
-        //         y;
-        //         this.proximo = null;
 
         ImageIcon ii = new ImageIcon(this.getClass().getResource(corpo));
         image = ii.getImage();
